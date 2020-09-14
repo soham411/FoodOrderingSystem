@@ -9,56 +9,90 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private EditText username;
+    private EditText address;
+    private EditText phoneno;
     private EditText email;
     private EditText password;
     private Button register;
-    private RadioButton usertype;
+    private RadioGroup radioGroup;
+    private RadioButton user_type;
+
     private FirebaseAuth auth;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        
+
+        username = findViewById(R.id.username);
         email = findViewById(R.id.email_reg);
         password = findViewById(R.id.password_reg);
         register = findViewById(R.id.register);
-
+        radioGroup = findViewById(R.id.radioGroup);
+        phoneno = findViewById(R.id.phoneno);
+        address = findViewById(R.id.address_reg);
         auth = FirebaseAuth.getInstance();
+
 
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String txt_username = username.getText().toString();
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
-                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password))
+                String txt_phoneno = phoneno.getText().toString();
+                String txt_address = address.getText().toString();
+                int usertype = radioGroup.getCheckedRadioButtonId();
+                user_type = findViewById(usertype);
+                String txt_user_type = user_type.getText().toString();
+                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password) || TextUtils.isEmpty((txt_phoneno))|| TextUtils.isEmpty(txt_address))
                     Toast.makeText(RegisterActivity.this,"Empty Credentials",Toast.LENGTH_SHORT).show();
                 else if(txt_password.length() < 6)
                     Toast.makeText(RegisterActivity.this,"Password too short",Toast.LENGTH_SHORT).show();
                 else
                 {
-                    registerUser(txt_email,txt_password);
+                    registerUser(txt_email,txt_password,txt_phoneno,txt_username,txt_address,txt_user_type);
                 }
             }
         });
     }
 
-    private void registerUser(String txt_email, String txt_password) {
+    private void registerUser(final String txt_email, final String txt_password, final String txt_phoneno,final String txt_username, final String txt_address, final String txt_user_type) {
         auth.createUserWithEmailAndPassword(txt_email,txt_password).addOnCompleteListener(RegisterActivity.this,new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-           if(task.isSuccessful()) Toast.makeText(RegisterActivity.this,"Registered",Toast.LENGTH_SHORT).show();
+           if(task.isSuccessful())
+           {
+               HashMap<String,Object> reg_user = new HashMap<String,Object>();
+               reg_user.put("username",txt_username);
+               reg_user.put("email",txt_email);
+               reg_user.put("password",txt_password);
+               reg_user.put("phoneno",txt_phoneno);
+               reg_user.put("address",txt_address);
+
+               DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(txt_user_type).child(auth.getCurrentUser().getUid());
+               ref.updateChildren(reg_user);
+               Toast.makeText(RegisterActivity.this,"Registered as "+txt_user_type,Toast.LENGTH_SHORT).show();
+
+           }
             else Toast.makeText(RegisterActivity.this,"Registration failed",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
