@@ -52,7 +52,7 @@ public class CartFragment extends Fragment {
         int sum=0;
         for (int i = 0; i < fprice.size(); i++) {
             sum += Integer.parseInt(fprice.get(i));
-            forPayment.add(fname.get(i)+" | "+frestaurant.get(i)+" | "+fquantity.get(i)+" | "+fprice.get(i));
+            forPayment.add(fname.get(i)+" - "+frestaurant.get(i)+" - "+fquantity.get(i)+" - "+fprice.get(i));
         }
         PaymentActivity.totalquantity = fname.size();
         totalnoOfitem.setText(Integer.toString(fname.size()));
@@ -125,9 +125,7 @@ public class CartFragment extends Fragment {
                     totalnoOfitem.setText(Integer.toString(Integer.parseInt(totalnoOfitem.getText().toString())+1));
                     quantity.setText(rquantity.get(position));
                     totamount.setText(rupeesymbol +Integer.toString(Integer.parseInt(totamount.getText().toString().substring(1)) + Integer.parseInt(rprice.get(position))));
-//       for (int i = 0; i < fprice.size(); i++) {
-                        forPayment.set(position,fname.get(position)+" | "+frestaurant.get(position)+" | "+fquantity.get(position)+" | "+fprice.get(position));
-//                    }
+                    forPayment.set(position,fname.get(position)+" - "+frestaurant.get(position)+" - "+fquantity.get(position)+" - "+fprice.get(position));
 
                 }
             });
@@ -139,6 +137,7 @@ public class CartFragment extends Fragment {
                     fquantity.set(position,rquantity.get(position));
                     totalnoOfitem.setText(Integer.toString(Integer.parseInt(totalnoOfitem.getText().toString())-1));
 
+
                     quantity.setText(rquantity.get(position));
                     totamount.setText(rupeesymbol +Integer.toString(Integer.parseInt(totamount.getText().toString().substring(1)) - Integer.parseInt(rprice.get(position))));
                     if(Integer.parseInt(rquantity.get(position) ) == 0 )
@@ -149,11 +148,10 @@ public class CartFragment extends Fragment {
                         rrestaurant.remove(position);
                         forPayment.remove(position);
                         adapterCart.notifyDataSetChanged();
+                        if(rfood_item.isEmpty()) startActivity(new Intent(getActivity(),HomeActivity.class));
                     }
-//                    for (int i = 0; i < fprice.size(); i++) {
-//                        forPayment.set(position,fname.get(i)+" | "+frestaurant.get(i)+" | "+fquantity.get(i)+" | "+fprice.get(i));
-//                    }
-                    forPayment.set(position,fname.get(position)+" | "+frestaurant.get(position)+" | "+fquantity.get(position)+" | "+fprice.get(position));
+
+                    forPayment.set(position,fname.get(position)+" - "+frestaurant.get(position)+" - "+fquantity.get(position)+" - "+fprice.get(position));
 
 
                 }

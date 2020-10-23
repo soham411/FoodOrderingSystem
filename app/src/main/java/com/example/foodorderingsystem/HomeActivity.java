@@ -26,16 +26,7 @@ private String rupeesymbol = "\u20B9";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        logout = findViewById(R.id.logout);
-        auth = FirebaseAuth.getInstance();
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-//                startActivity(new Intent(HomeActivity.this,RestaurantActivity.class));
-                finish();
-            }
-        });
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_home,new HomeFragment()).commit();
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -55,9 +46,7 @@ private String rupeesymbol = "\u20B9";
                     selectedFragment = new SearchFragment();
                     break;
                 case R.id.navigation_cart:
-//                    startActivity(new Intent(HomeActivity.this,CartActivity.class));
                     selectedFragment = new CartFragment();
-//                    CartFragment cartFragment = selectedFragment;
                     break;
                 case R.id.navigation_account:
                     selectedFragment = new AccountFragment();
@@ -72,7 +61,6 @@ private String rupeesymbol = "\u20B9";
     public void changeActivity() {
         
         startActivity(new Intent(HomeActivity.this,RestaurantActivity.class));
-//        Toast.makeText(HomeActivity.this, "done changing", Toast.LENGTH_SHORT).show();
         Log.d("in func", "changeActivity: to Rest");
     }
 }

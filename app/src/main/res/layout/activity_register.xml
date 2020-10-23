@@ -11,7 +11,7 @@
         android:id="@+id/password_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="password"
@@ -24,7 +24,7 @@
         android:id="@+id/email_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="emailid"
@@ -49,25 +49,24 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="150dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/register"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="5dp"
-        >
+        app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
             android:id="@+id/radio_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Customer"
-            android:checked="true"/>
+            android:checked="true"
+            android:text="Customer" />
 
         <RadioButton
             android:id="@+id/radio_manager"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Manager"/>
+            android:text="Manager" />
 
     </RadioGroup>
 
@@ -75,7 +74,7 @@
         android:id="@+id/address_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="Delivery Address"
         android:inputType="textPostalAddress"
@@ -87,8 +86,9 @@
         android:id="@+id/phoneno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="phoneno"
         android:inputType="phone"
         app:layout_constraintBottom_toTopOf="@+id/email_reg"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,11 +98,24 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="name"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/phoneno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/restaurantname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:ems="10"
+        android:hint="Restaurant"
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
