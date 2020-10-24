@@ -51,7 +51,7 @@ public class PaymentActivity extends AppCompatActivity {
 //                    String index = Integer.toString(i);
                     String str = finalorderlist.get(i);
                     String strlist[] = str.split(" - ",0);
-                    ref.child(strlist[1]).child(auth.getCurrentUser().getUid()).child(strlist[0]).setValue(strlist[2]+" "+strlist[3]);
+                    ref.child(strlist[1]).child(auth.getCurrentUser().getUid()).child(strlist[0]).setValue(strlist[2]+" "+strlist[3]+" COD");
 //
                 }
                 startActivity(new Intent(PaymentActivity.this,TrackActivity.class));
@@ -67,7 +67,7 @@ public class PaymentActivity extends AppCompatActivity {
                     String index = Integer.toString(i);
                     String str = finalorderlist.get(i);
                     String strlist[] = str.split(" - ",0);
-                    ref.child(strlist[1]).child(auth.getCurrentUser().getUid()).child(strlist[0]).setValue(strlist[2]+" "+strlist[3]);
+                    ref.child(strlist[1]).child(auth.getCurrentUser().getUid()).child(strlist[0]).setValue(strlist[2]+" "+strlist[3]+" OP");
 
                 }
                 startActivity(new Intent(PaymentActivity.this,OnlinePayActivity.class));

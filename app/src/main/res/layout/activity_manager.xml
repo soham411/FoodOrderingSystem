@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="New Orders"
             android:textSize="25sp"/>
+
         <Button
             android:id="@+id/dispatchedorders"
             android:layout_width="match_parent"

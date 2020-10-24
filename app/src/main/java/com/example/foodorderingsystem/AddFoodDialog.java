@@ -28,7 +28,7 @@ public class AddFoodDialog extends AppCompatDialogFragment {
 
     private EditText newfoodname;
     private EditText newfoodprice;
-    String restaurantname ="";
+    private static String restaurantname ="";
     private FirebaseAuth auth;
     @NonNull
     @Override
@@ -57,12 +57,14 @@ public class AddFoodDialog extends AppCompatDialogFragment {
                             if(Objects.equals(dataSnapshot.getKey(), "Restaurant"))
                             {
                                 restaurantname = dataSnapshot.getValue().toString();
+                                OrderActivity.restaurantname = restaurantname;
                                 DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("Menu").child(restaurantname);
                                 HashMap<String,Object> reg_user = new HashMap<String,Object>();
                                 reg_user.put(newfoodname.getText().toString(),newfoodprice.getText().toString());
                                 ref1.updateChildren(reg_user);
 //                                Toast.makeText(AddFoodDialog.this, "", Toast.LENGTH_SHORT).show();
 //                                break;
+
                             }
                         }
 
@@ -80,4 +82,6 @@ public class AddFoodDialog extends AppCompatDialogFragment {
 
         return builder.create();
     }
+
+
 }
