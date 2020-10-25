@@ -6,4 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".TrackActivity">
 
+    <ListView
+        android:id="@+id/olist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
+        android:text="Yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/olist" />
+
+    <TextView
+        android:id="@+id/textifreceived"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="If received click yes"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/yes"
+        app:layout_constraintTop_toBottomOf="@+id/olist" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yes" />
+
+    <EditText
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="Write a review.."
+        android:inputType="textPersonName"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:text="send"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/review" />
 </androidx.constraintlayout.widget.ConstraintLayout>

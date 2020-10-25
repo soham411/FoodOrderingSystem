@@ -29,7 +29,7 @@ public class CartFragment extends Fragment {
     private String fooditemname;
     private String fooditemprice= rupeesymbol+" 0";
     private String foodquantity;
-    public MyAdapterCart adapterCart;
+    public static MyAdapterCart adapterCart;
     public  static ArrayList<String> fname = new ArrayList<>();
     public  static ArrayList<String> fprice = new ArrayList<>();
     public  static ArrayList<String> fquantity = new ArrayList<>();

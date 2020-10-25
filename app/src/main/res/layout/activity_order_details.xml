@@ -7,10 +7,11 @@
     tools:context=".OrderDetails">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="408dp"
+        android:layout_height="500dp"
+        android:layout_marginBottom="80dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/selectdelv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,23 +19,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="80dp"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/namedelv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
                 android:text="name"
-                android:textSize="20sp"
-                android:layout_marginLeft="70dp"/>
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/phonedelv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:layout_marginLeft="100dp"
                 android:text="phone"
-                android:layout_marginLeft="100dp"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -44,11 +46,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
+            android:layout_marginLeft="80dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginLeft="80dp"
             android:text="address"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <ListView
             android:id="@+id/itemlist"
@@ -57,39 +59,39 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/selectdelv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginBottom="30dp"
-                android:text="Select" />
-
-            <TextView
-                android:id="@+id/delivname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:text="delvboy"
-                android:layout_marginLeft="100dp"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/dispatch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="150dp"
-            android:text="Dispatch" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/selectdelv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="Select"
+        app:layout_constraintBottom_toTopOf="@+id/dispatch"
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/delivname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="delvboy"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/dispatch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/selectdelv" />
 
+    <Button
+        android:id="@+id/dispatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="Dispatch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
