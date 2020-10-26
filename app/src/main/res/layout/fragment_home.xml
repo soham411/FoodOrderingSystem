@@ -2,51 +2,35 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp"
-    android:background="#E4B876">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="414dp"
-        android:layout_height="722dp"
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true" android:src="@drawable/f2"/>
+
+    <TextView
+        android:id="@+id/selectRestaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#9C27B0"
+        android:backgroundTint="#7F2A8E"
+        android:fontFamily="sans-serif"
+        android:padding="20dp"
+        android:text="Pick A Restaurant"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FAFBFB"
+        android:textSize="35sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="60dp"
-            android:background="#0B69B5"
-            android:baselineAligned="false">
-
-            <TextView
-                android:id="@+id/selectRestaurant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:padding="20dp"
-                android:text="Pick A Restaurant"
-                android:textAlignment="center"
-                android:textColor="#FAFBFB"
-                android:textSize="35sp">
-
-            </TextView>
-        </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-    </LinearLayout>
+    </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

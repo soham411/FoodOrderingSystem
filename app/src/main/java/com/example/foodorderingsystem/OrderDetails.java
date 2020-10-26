@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,10 @@ public class OrderDetails extends AppCompatActivity {
     public static String uid;
     public static String restantname;
     public static String delivname;
+    private String  item_name;
+int quantity;
+float unitCost ;
+ float subTotal;
     ListView listView;
     TextView name;
     TextView address;
@@ -115,6 +120,7 @@ public class OrderDetails extends AppCompatActivity {
             }
         });
         selectDelv = findViewById(R.id.selectdelv);
+        quantity=1;item_name="";
         dispatch = findViewById(R.id.dispatch);
         DatabaseReference ref3 = FirebaseDatabase.getInstance().getReference().child("DeliveryPersonnel");
         ref3.addValueEventListener(new ValueEventListener() {
@@ -134,30 +140,31 @@ public class OrderDetails extends AppCompatActivity {
         dispatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference ref4 = FirebaseDatabase.getInstance().getReference().child("Users").child("Manager").child(auth.getCurrentUser().getUid());
-                ref4.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren())
-                        {
-                            if(Objects.equals(dataSnapshot.getKey(), "Restaurant"))
-                            {
-                                String restantname = dataSnapshot.getValue().toString();
-                                DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("Orders").child(restantname).child(uid);
-                                HashMap<String,Object> reg_user = new HashMap<String,Object>();
-//                                reg_user.put(newfoodname.getText().toString(),newfoodprice.getText().toString());
-                                ref1.updateChildren(reg_user);
+                Toast.makeText(OrderDetails.this, "Order dispatched", Toast.LENGTH_SHORT).show();
+                dispatch.setText("Dispatched");
 
-
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                unitCost = 2;
+                subTotal=100;
+//                DatabaseReference ref4 = FirebaseDatabase.getInstance().getReference().child("Users").child("Manager").child(auth.getCurrentUser().getUid());
+//                ref4.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        for(DataSnapshot dataSnapshot : snapshot.getChildren())
+//                        {
+//                            if(Objects.equals(dataSnapshot.getKey(), "Restaurant"))
+//                            {
+//
+//
+//
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
 
 
             }
@@ -179,6 +186,7 @@ public class OrderDetails extends AppCompatActivity {
 
 
     private String openDelvDialog() {
+
         DeliveryDialog deliveryDialog = new DeliveryDialog();
         deliveryDialog.show(getSupportFragmentManager(),"Add Food Item");
         return deliveryDialog.getDelivname();

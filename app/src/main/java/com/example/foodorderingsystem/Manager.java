@@ -2,7 +2,6 @@ package com.example.foodorderingsystem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,13 +15,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.Objects;
 
-public class ManagerActivity extends AppCompatActivity {
+public class Manager extends AppCompatActivity {
 
     private Button addfooditem ;
-    private Button dispatched;
+    private Button reviews;
     private Button neworders;
     private Button logoutman;
     String restaurantname ="";
@@ -35,13 +33,13 @@ public class ManagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manager);
 
         addfooditem = findViewById(R.id.addfooditem);
-        dispatched = findViewById(R.id.dispatchedorders);
+        reviews = findViewById(R.id.reviewsratings);
         neworders = findViewById(R.id.neworders);
         logoutman = findViewById(R.id.logoutman);
         neworders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ManagerActivity.this,OrderActivity.class));
+                startActivity(new Intent(Manager.this,Order.class));
                 auth = FirebaseAuth.getInstance();
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child("Manager").child(auth.getCurrentUser().getUid());
                 ref.addValueEventListener(new ValueEventListener() {
@@ -52,7 +50,7 @@ public class ManagerActivity extends AppCompatActivity {
                             if(Objects.equals(dataSnapshot.getKey(), "Restaurant"))
                             {
                                 restaurantname = dataSnapshot.getValue().toString();
-                                OrderActivity.restaurantname = restaurantname;
+                                Order.restaurantname = restaurantname;
 //                                DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("Menu").child(restaurantname);
 //                                HashMap<String,Object> reg_user = new HashMap<String,Object>();
 //                                reg_user.put(newfoodname.getText().toString(),newfoodprice.getText().toString());
@@ -79,12 +77,19 @@ public class ManagerActivity extends AppCompatActivity {
                 openDialog();
             }
         });
+        reviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Manager.this,Reviews.class));
+
+            }
+        });
         logoutman.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 auth = FirebaseAuth.getInstance();
                 auth.signOut();
-                startActivity(new Intent(ManagerActivity.this,MainActivity.class));
+                startActivity(new Intent(Manager.this,MainActivity.class));
             }
         });
 

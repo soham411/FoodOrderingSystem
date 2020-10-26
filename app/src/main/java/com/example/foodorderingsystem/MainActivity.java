@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button register;
+    private Button reg;
     private Button login;
     private EditText email;
     private EditText password;
@@ -42,17 +42,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        register = findViewById(R.id.register);
+        reg = findViewById(R.id.register);
         login = findViewById(R.id.login);
         password = findViewById(R.id.password);
         email = findViewById(R.id.email);
 
         auth = FirebaseAuth.getInstance();
 
-        register.setOnClickListener(new View.OnClickListener() {
+        reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,RegisterActivity.class));
+                register();
 //                finish();
 
             }
@@ -65,9 +65,13 @@ public class MainActivity extends AppCompatActivity {
                 pd.show();
                 String txt_email_login = email.getText().toString();
                 String txt_password_login = password.getText().toString();
-                loginUser(txt_email_login,txt_password_login);
+                login(txt_email_login,txt_password_login);
                   }
         });
+    }
+
+    private void register() {
+        startActivity(new Intent(MainActivity.this,RegisterActivity.class));
     }
 
     @Override
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                                 {
                                     startActivity(new Intent(MainActivity.this,HomeActivity.class));
                                 }
-                                else startActivity(new Intent(MainActivity.this,ManagerActivity.class));
+                                else startActivity(new Intent(MainActivity.this,Manager.class));
                             }
                         }
 //                        usertype[0] = String.valueOf(snapshot.child(auth.getCurrentUser().getUid()).getValue());
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
     }
 
-    public void loginUser(String txt_email_login, String txt_password_login) {
+    public void login(String txt_email_login, String txt_password_login) {
         auth.signInWithEmailAndPassword(txt_email_login,txt_password_login).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                                 {
                                     startActivity(new Intent(MainActivity.this,HomeActivity.class));
                                 }
-                                else startActivity(new Intent(MainActivity.this,ManagerActivity.class));
+                                else startActivity(new Intent(MainActivity.this,Manager.class));
                             }
                         }
 //                       usertype[0] = String.valueOf(snapshot.child(auth.getCurrentUser().getUid()).getValue());

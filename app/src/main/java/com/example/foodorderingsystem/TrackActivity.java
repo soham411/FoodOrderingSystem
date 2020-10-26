@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.example.foodorderingsystem.OrderActivity.restaurantname;
+import static com.example.foodorderingsystem.Order.restaurantname;
 import static com.example.foodorderingsystem.PaymentActivity.finalorderlist;
 
 public class TrackActivity extends AppCompatActivity {
@@ -65,6 +65,13 @@ TextView thanks;
                 ratingBar.setVisibility(View.VISIBLE);
                 review.setVisibility(View.VISIBLE);
                 send.setVisibility(View.VISIBLE);
+//                DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference();
+//                for (String s : revrestlist)
+//                {
+//                    ref1.child("Orders").child(s).child(auth.getCurrentUser().getUid());
+//                    ref1.removeValue();
+//                }
+
             }
         });
         send.setOnClickListener(new View.OnClickListener() {
@@ -75,17 +82,16 @@ TextView thanks;
                                 HashMap<String,Object> reg_user = new HashMap<String,Object>();
                                 reg_user.put("rating",ratingBar.getRating());
                                 reg_user.put("review",review.getText().toString());
-                                ref1.updateChildren(reg_user);
                 for (String s:revrestlist)
                 {
                     ref1.child("Reviews").child(s).child(auth.getCurrentUser().getUid()).updateChildren(reg_user);
                 }
-                CartFragment.forPayment.clear();
-                CartFragment.fname.clear();
-                CartFragment.fprice.clear();
-                CartFragment.fquantity.clear();
-                CartFragment.frestaurant.clear();
-                CartFragment.adapterCart.notifyDataSetChanged();
+                Cart.forPayment.clear();
+                Cart.fname.clear();
+                Cart.fprice.clear();
+                Cart.fquantity.clear();
+                Cart.frestaurant.clear();
+                Cart.adapterCart.notifyDataSetChanged();
                 startActivity(new Intent(TrackActivity.this,HomeActivity.class));
             }
         });

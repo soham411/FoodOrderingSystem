@@ -22,10 +22,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class OrderActivity extends AppCompatActivity {
-//    ArrayList<String> orderlist = new ArrayList<>();
+public class Order extends AppCompatActivity {
     public static String restaurantname ="";
     ListView ol;
+
+    final ArrayList<String> orderlist = new ArrayList<>();
+    final ArrayAdapter<String> adapterR = new ArrayAdapter<String>(this,R.layout.list_item,orderlist);
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,6 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order);
         ol = findViewById(R.id.manorderlist);
         auth = FirebaseAuth.getInstance();
-        final ArrayList<String> orderlist = new ArrayList<>();
-        final ArrayAdapter<String> adapterR = new ArrayAdapter<String>(this,R.layout.list_item,orderlist);
         ol.setAdapter(adapterR);
 //        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("Orders");
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child("Manager").child(auth.getCurrentUser().getUid());
@@ -51,12 +51,7 @@ public class OrderActivity extends AppCompatActivity {
                         ref1.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                                for(DataSnapshot dataSnapshot1 : snapshot.getChildren())
-                                {
-                                    orderlist.add(dataSnapshot1.getKey());
-                                }
-                                adapterR.notifyDataSetChanged();
+                                recieveorder(snapshot);
                             }
 
                             @Override
@@ -78,17 +73,19 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 OrderDetails.uid= orderlist.get(position);
-                startActivity(new Intent(OrderActivity.this,OrderDetails.class));
+                startActivity(new Intent(Order.this,OrderDetails.class));
             }
         });
 
-        if(restaurantname.equals("")) Toast.makeText(OrderActivity.this, "not working", Toast.LENGTH_SHORT).show();
+        if(restaurantname.equals("")) Toast.makeText(Order.this, "not working", Toast.LENGTH_SHORT).show();
     }
-//    private void setname(String restaurantname) {
-//        OrderActivity.restaurantname = restaurantname;
-//    }
-//    public static String getname()
-//    {
-//        return OrderActivity.restaurantname;
-//    }
+
+    private void recieveorder(DataSnapshot snapshot) {
+        for(DataSnapshot dataSnapshot1 : snapshot.getChildren())
+        {
+            orderlist.add(dataSnapshot1.getKey());
+        }
+        adapterR.notifyDataSetChanged();
+    }
+//
 }

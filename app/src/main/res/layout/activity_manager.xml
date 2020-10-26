@@ -30,11 +30,11 @@
             android:textSize="25sp"/>
 
         <Button
-            android:id="@+id/dispatchedorders"
+            android:id="@+id/reviewsratings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dispatched Orders"
-            android:textSize="25sp"/>
+            android:text="REviews and ratings"
+            android:textSize="25sp" />
         <Button
             android:id="@+id/logoutman"
             android:layout_width="match_parent"

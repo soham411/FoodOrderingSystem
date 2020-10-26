@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MenuActivity extends AppCompatActivity  {
+public class Menu extends AppCompatActivity  {
 
     private static String restaurant_name ;
     public String rupeesymbol = "\u20B9";
@@ -118,10 +118,10 @@ public class MenuActivity extends AppCompatActivity  {
             addtocart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CartFragment.fname.add(rtitle.get(position) );
-                    CartFragment.fprice.add(rsubtitle.get(position).substring(3));
-                    CartFragment.frestaurant.add(restaurant_name);
-                    CartFragment.fquantity.add("1");
+                    Cart.fname.add(rtitle.get(position) );
+                    Cart.fprice.add(rsubtitle.get(position).substring(3));
+                    Cart.frestaurant.add(restaurant_name);
+                    Cart.fquantity.add("1");
                 }
             });
             mytitle.setText(rtitle.get(position));

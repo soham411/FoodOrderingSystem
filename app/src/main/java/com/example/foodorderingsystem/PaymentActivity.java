@@ -44,34 +44,41 @@ public class PaymentActivity extends AppCompatActivity {
         cod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              ref = FirebaseDatabase.getInstance().getReference().child("Orders");
-////                DatabaseReference myref = FirebaseDatabase.getInstance().getReference().
-                auth = FirebaseAuth.getInstance();
-                for (int i = 0; i < finalorderlist.size(); i++) {
-//                    String index = Integer.toString(i);
-                    String str = finalorderlist.get(i);
-                    String strlist[] = str.split(" - ",0);
-                    ref.child(strlist[1]).child(auth.getCurrentUser().getUid()).child(strlist[0]).setValue(strlist[2]+" "+strlist[3]);
-//
-                }
+             place_order();
                 startActivity(new Intent(PaymentActivity.this,TrackActivity.class));
             }
         });
-        op.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        op.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                ref = FirebaseDatabase.getInstance().getReference().child("Orders");
+//                auth = FirebaseAuth.getInstance();
+//                for (int i = 0; i < finalorderlist.size(); i++) {
+//                    String index = Integer.toString(i);
+//                    String str = finalorderlist.get(i);
+//                    String strlist[] = str.split(" - ",0);
+//                    ref.child(strlist[1]).child(auth.getCurrentUser().getUid()).child(strlist[0]).setValue(strlist[2]+" "+strlist[3]);
+//
+//                }
+////                startActivity(new Intent(PaymentActivity.this,OnlinePayActivity.class));
+//            }
+//        });
+    }
 
-                ref = FirebaseDatabase.getInstance().getReference().child("Orders");
-                auth = FirebaseAuth.getInstance();
-                for (int i = 0; i < finalorderlist.size(); i++) {
-                    String index = Integer.toString(i);
-                    String str = finalorderlist.get(i);
-                    String strlist[] = str.split(" - ",0);
-                    ref.child(strlist[1]).child(auth.getCurrentUser().getUid()).child(strlist[0]).setValue(strlist[2]+" "+strlist[3]);
-
-                }
-                startActivity(new Intent(PaymentActivity.this,OnlinePayActivity.class));
+    private void place_order() {
+        ref = FirebaseDatabase.getInstance().getReference().child("Orders");
+////                DatabaseReference myref = FirebaseDatabase.getInstance().getReference().
+        auth = FirebaseAuth.getInstance();
+        if(finalorderlist != null)
+        {
+            for (int i = 0; i < finalorderlist.size(); i++) {
+//                    String index = Integer.toString(i);
+                String str = finalorderlist.get(i);
+                String strlist[] = str.split(" - ",0);
+                ref.child(strlist[1]).child(auth.getCurrentUser().getUid()).child(strlist[0]).setValue(strlist[2]+" "+strlist[3]);
+//
             }
-        });
+        }
     }
 }

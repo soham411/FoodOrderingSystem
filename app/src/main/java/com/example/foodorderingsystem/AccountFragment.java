@@ -50,7 +50,7 @@ public class AccountFragment extends Fragment  {
         change_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            openDialog();
+                change_delivery_address();
             }
         });
 
@@ -65,7 +65,7 @@ public class AccountFragment extends Fragment  {
 
         return v;
     }
-     public void openDialog(){
+     public void change_delivery_address(){
         ChangeAddressDialog changeAddressDialog = new ChangeAddressDialog();
         changeAddressDialog.show(getFragmentManager(),"Change Address");
 

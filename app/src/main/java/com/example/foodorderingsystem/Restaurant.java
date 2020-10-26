@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class RestaurantActivity extends AppCompatActivity {
+public class Restaurant extends AppCompatActivity {
 
     private static final String TAG = "tag";
     private ListView listView;
@@ -56,8 +56,8 @@ public class RestaurantActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String selectedRestaurant = list.get(position);
-                    MenuActivity.getRestaurant(selectedRestaurant);
-                    startActivity(new Intent(RestaurantActivity.this,MenuActivity.class));
+                    Menu.getRestaurant(selectedRestaurant);
+                    startActivity(new Intent(Restaurant.this,Menu.class));
                 }
             });
 

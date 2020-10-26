@@ -57,7 +57,7 @@ public class AddFoodDialog extends AppCompatDialogFragment {
                             if(Objects.equals(dataSnapshot.getKey(), "Restaurant"))
                             {
                                 restaurantname = dataSnapshot.getValue().toString();
-                                OrderActivity.restaurantname = restaurantname;
+                                Order.restaurantname = restaurantname;
                                 DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("Menu").child(restaurantname);
                                 HashMap<String,Object> reg_user = new HashMap<String,Object>();
                                 reg_user.put(newfoodname.getText().toString(),newfoodprice.getText().toString());

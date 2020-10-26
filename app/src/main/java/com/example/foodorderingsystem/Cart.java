@@ -21,7 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public class CartFragment extends Fragment {
+public class Cart extends Fragment {
     private String rupeesymbol = "\u20B9";
     private ListView cartlist;
     private TextView totamount;
@@ -66,20 +66,13 @@ public class CartFragment extends Fragment {
         toPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(fname.isEmpty())
-                {
-                    Toast.makeText(getActivity(), "Add food to cart", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                PaymentActivity.finalorderlist= forPayment;
-                PaymentActivity.total_amt=Integer.parseInt(totamount.getText().toString().substring(1));
-
-                startActivity(new Intent(getActivity(),PaymentActivity.class));
-
+                checkout();
             }
         });
         return v;
     }
+
+
 
 
     public  class MyAdapterCart extends ArrayAdapter<String>
@@ -120,13 +113,7 @@ public class CartFragment extends Fragment {
             increaseQuantity.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    rquantity.set(position,Integer.toString(Integer.parseInt(rquantity.get(position))+1));
-                    fquantity.set(position,rquantity.get(position));
-                    totalnoOfitem.setText(Integer.toString(Integer.parseInt(totalnoOfitem.getText().toString())+1));
-                    quantity.setText(rquantity.get(position));
-                    totamount.setText(rupeesymbol +Integer.toString(Integer.parseInt(totamount.getText().toString().substring(1)) + Integer.parseInt(rprice.get(position))));
-                    forPayment.set(position,fname.get(position)+" - "+frestaurant.get(position)+" - "+fquantity.get(position)+" - "+fprice.get(position));
-
+                    add_item(position,quantity);
                 }
             });
 
@@ -136,8 +123,6 @@ public class CartFragment extends Fragment {
                     rquantity.set(position,Integer.toString(Integer.parseInt(rquantity.get(position))-1));
                     fquantity.set(position,rquantity.get(position));
                     totalnoOfitem.setText(Integer.toString(Integer.parseInt(totalnoOfitem.getText().toString())-1));
-
-
                     quantity.setText(rquantity.get(position));
                     totamount.setText(rupeesymbol +Integer.toString(Integer.parseInt(totamount.getText().toString().substring(1)) - Integer.parseInt(rprice.get(position))));
                     if(Integer.parseInt(rquantity.get(position) ) == 0 )
@@ -148,7 +133,7 @@ public class CartFragment extends Fragment {
                         rrestaurant.remove(position);
                         forPayment.remove(position);
                         adapterCart.notifyDataSetChanged();
-                        if(rfood_item.isEmpty()) startActivity(new Intent(getActivity(),HomeActivity.class));
+                        if(rfood_item.isEmpty()) cancel_order();
                     }
 
                     forPayment.set(position,fname.get(position)+" - "+frestaurant.get(position)+" - "+fquantity.get(position)+" - "+fprice.get(position));
@@ -161,5 +146,30 @@ public class CartFragment extends Fragment {
 
             return r;
         }
+
+        private void add_item(int position,TextView quantity) {
+            rquantity.set(position,Integer.toString(Integer.parseInt(rquantity.get(position))+1));
+            fquantity.set(position,rquantity.get(position));
+            totalnoOfitem.setText(Integer.toString(Integer.parseInt(totalnoOfitem.getText().toString())+1));
+            quantity.setText(rquantity.get(position));
+            totamount.setText(rupeesymbol +Integer.toString(Integer.parseInt(totamount.getText().toString().substring(1)) + Integer.parseInt(rprice.get(position))));
+            forPayment.set(position,fname.get(position)+" - "+frestaurant.get(position)+" - "+fquantity.get(position)+" - "+fprice.get(position));
+
+        }
+    }
+
+    private void cancel_order() {
+        startActivity(new Intent(getActivity(),HomeActivity.class));
+    }
+
+    private void checkout() {
+        if(fname.isEmpty())
+        {
+            Toast.makeText(getActivity(), "Add food to cart", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        PaymentActivity.finalorderlist= forPayment;
+        PaymentActivity.total_amt=Integer.parseInt(totamount.getText().toString().substring(1));
+        startActivity(new Intent(getActivity(),PaymentActivity.class));
     }
 }

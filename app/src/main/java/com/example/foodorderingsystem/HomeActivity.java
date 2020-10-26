@@ -46,7 +46,7 @@ private String rupeesymbol = "\u20B9";
                     selectedFragment = new SearchFragment();
                     break;
                 case R.id.navigation_cart:
-                    selectedFragment = new CartFragment();
+                    selectedFragment = new Cart();
                     break;
                 case R.id.navigation_account:
                     selectedFragment = new AccountFragment();
@@ -60,7 +60,7 @@ private String rupeesymbol = "\u20B9";
     @Override
     public void changeActivity() {
         
-        startActivity(new Intent(HomeActivity.this,RestaurantActivity.class));
+        startActivity(new Intent(HomeActivity.this,Restaurant.class));
         Log.d("in func", "changeActivity: to Rest");
     }
 }
